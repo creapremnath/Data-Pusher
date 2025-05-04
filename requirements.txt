@@ -1,0 +1,9 @@
+Django
+djangorestframework
+drf-yasg
+django-cors-headers
+django-filter
+celery
+redis
+django-ratelimit
+rest_framework_simplejwt
