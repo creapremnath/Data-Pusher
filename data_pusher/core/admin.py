@@ -8,7 +8,7 @@ admin.site.register(User)
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'role_name')
+    list_display = ('role_id', 'role_name')
 
 
 admin.site.register(Account)

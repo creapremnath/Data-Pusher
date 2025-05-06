@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'django_filters',
-    # 'django_ratelimit',
+    'django_ratelimit',
     'rest_framework_simplejwt',
+    'drf_spectacular',
     'core',
 
 ]
@@ -135,13 +136,36 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # JWT Settings
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    ],
 }
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Data Pusher',
+    'DESCRIPTION': 'Data Pusher is a Django-based backend application that allows registered users (Admins and Normal users) to manage accounts and their associated destinations for sending data. The system receives incoming JSON data for a specific account and pushes it to its configured destinations (webhooks), handling everything asynchronously with logs for tracking.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    
+}
+
 
 SIMPLE_JWT = {
     'TOKEN_OBTAIN_SERIALIZER': 'core.serializers.CustomTokenObtainPairSerializer',
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
 
+}
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
 }

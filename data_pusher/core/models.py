@@ -23,6 +23,7 @@ class Role(models.Model):
         ('Admin', 'Admin'),
         ('User', 'User'),
     ]
+    role_id = models.AutoField(primary_key=True, unique=True, null=False)
     role_name = models.CharField(max_length=20, choices=ROLE_CHOICES, unique=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
